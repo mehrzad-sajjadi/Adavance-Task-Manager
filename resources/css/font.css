@@ -1,0 +1,17 @@
+/* @font-face {
+	font-family: 'IranianSansBold';
+	src: url('../fonts/IranianSansBold.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'IranianSansRegular';
+	src: url('../fonts/IranianSansRegular.ttf') format('truetype');
+} */
+@font-face {
+	font-family: 'IranianSans';
+	src: url('../fonts/IRANSans-web.woff') format('woff');
+}
+
+*{
+    font-family: "IranianSans";
+	direction: rtl;
+}
