@@ -17,12 +17,12 @@ class Category extends Model
         "user_id",
     ];
 
-    public function post(){
-        return $this->hasMany(Post::class);
-    }
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
+    public function post(){
+        return $this->hasMany(Post::class);
+    }
 }

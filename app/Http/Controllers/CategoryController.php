@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -18,7 +19,6 @@ class CategoryController extends Controller
  */
 public function index()
 {
-    
     $user_id = Auth::id();
     $categories = Category::where('user_id' , $user_id)->get();
     return Inertia::render("posts/categories/index_category",compact("categories"));
@@ -57,9 +57,14 @@ public function store(categoryStoreRequest $categoryStoreRequest)
 public function show($id)
 {
     $category=Category::find($id);
+    
+    if (!Gate::allows('show_category',$category) ) {
+        abort(403,"TEXT");
+    }
+    
     $posts=$category->Post->toArray();
     $user_name = $category->user->name;
-
+    
     return Inertia::render("posts/categories/show_category",compact("posts","category","user_name"));
 }
 

@@ -98,7 +98,7 @@ return array(
     */
     'attributes' => array(
         "category_id"=>"دسته بندی",
-        "name" => "نام",
+        "name" => "بی ناموس",
         "username" => "نام کاربری",
         "email" => "پست الکترونیکی",
         "first_name" => "نام",

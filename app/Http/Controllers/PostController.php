@@ -19,9 +19,13 @@ public function index()
 {
     $user_id = Auth::id();
     $category_ids = Category::where("user_id",$user_id)->pluck('id');
-    $posts = Post::whereIn("category_id",$category_ids)->paginate(4)->toArray();
+
+    $posts = Post::whereIn("category_id",$category_ids)->paginate(4);
+
     return Inertia::render("posts/index_post",compact("posts"));
 }
+
+
 
 /**
  * Show the form for creating a new resource.
@@ -107,7 +111,8 @@ public function update(postRequest $postRequest,$id)
 public function destroy(Post $post)
 {
     $post->delete();
-    return redirect()->route("post_index")->with("message","پست مورد نظر حذف شد");;
+    return "Finish";
+    // return redirect()->route("post_index")->with("message","پست مورد نظر حذف شد");;
 }
 
 }

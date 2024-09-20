@@ -124,11 +124,9 @@ export default {
         errors: Object,
     },
     setup(props) {
-        console.log(usePage().props.errors);
         const form = useForm({
             name: "",
             content: "",
-            user_id: props.user_id,
             category_id: "",
         });
 

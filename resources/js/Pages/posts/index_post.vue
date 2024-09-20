@@ -39,6 +39,7 @@
                 >
                     <div class="content">
                         {{ post.name }}
+                        {{ post.category.name }}
                     </div>
                     <div class="min-w-max px-5 flex flex-row justify-between">
                         <!-- Show -->
@@ -95,6 +96,7 @@ import { TrashIcon, EyeIcon, PencilSquareIcon } from "@heroicons/vue/24/solid";
 export default {
     components: {
         Link,
+
         usePage,
         router,
         useForm,
