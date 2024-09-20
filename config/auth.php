@@ -1,7 +1,11 @@
 <?php
+use App\Models\Category;
+use App\Policies\CategoryPolicy;
 
 return [
-
+    // "policies"=>[
+    //     Category::class=>CategoryPolicy::class
+    // ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\categoryStoreRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -56,16 +57,18 @@ public function store(categoryStoreRequest $categoryStoreRequest)
  */
 public function show($id)
 {
-    $category=Category::find($id);
+
+    $user = User::find(Auth::id());
+    $cat=Category::find($id);
     
-    if (!Gate::allows('show_category',$category) ) {
-        abort(403,"TEXT");
+    if(!$user->can("view",$cat)){
+        abort(403);
     }
-    
-    $posts=$category->Post->toArray();
-    $user_name = $category->user->name;
-    
+    $posts=$cat->Post->toArray();
+    $user_name = $cat->user->name;
     return Inertia::render("posts/categories/show_category",compact("posts","category","user_name"));
+
+
 }
 
 /**
@@ -73,7 +76,16 @@ public function show($id)
  */
 public function edit($id)
 {
+    //باید حتما به صورت آبجکت باشه
+    $user = User::find(Auth::id());
+
     $category = Category::findOrFail($id);
+    // if(!$user->can("view",$category)){
+    //     abort(403);
+    // }
+    // dd("Succes");
+    
+
     return Inertia::render("posts/categories/edit_category",compact('category'));
 }
 
@@ -83,7 +95,14 @@ public function edit($id)
 
 public function update(categoryStoreRequest $categoryStoreRequest,$id)
 {
+    $user = User::find(Auth::id());
+
     $category=Category::findOrFail($id);
+    if(!$user->can("update",$category)){
+        abort(403);
+    }
+
+
     $category->name=$categoryStoreRequest->name;
     $check = $category->where("name",$category->name)->first();
     if($check){
