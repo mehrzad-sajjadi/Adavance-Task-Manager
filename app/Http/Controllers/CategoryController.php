@@ -20,8 +20,19 @@ class CategoryController extends Controller
  */
 public function index()
 {
-    $user_id = Auth::id();
-    $categories = Category::where('user_id' , $user_id)->get();
+    $categories2 = Category::all();
+    $categories=[];
+    foreach($categories2 as $category){
+        array_push($categories,[
+            "id"=>$category->id,
+            "name"=>$category->name
+        ]);
+    }
+    // $user_id = Auth::id();
+    // $categories = Category::where('user_id' , $user_id)->get()->map();
+    // $context = [
+    //     id=>
+    // ];
     return Inertia::render("posts/categories/index_category",compact("categories"));
 }
 
@@ -59,14 +70,14 @@ public function show($id)
 {
 
     $user = User::find(Auth::id());
-    $cat=Category::find($id);
+    $category=Category::find($id);
     
-    if(!$user->can("view",$cat)){
+    if(!$user->can("view",$category)){
         abort(403);
     }
-    $posts=$cat->Post->toArray();
-    $user_name = $cat->user->name;
-    return Inertia::render("posts/categories/show_category",compact("posts","category","user_name"));
+    $posts=$category->Post->toArray();
+    $user_name = $category->user->name;
+    return Inertia::render("posts/categories/new",compact("posts","category","user_name"));
 
 
 }
@@ -122,4 +133,18 @@ public function destroy(Category $category)
     return redirect()->route("category_index")->with("message","دسته بندی مورد نظر حذف شد");;
 }
 
+
+
+public function axios(Request $request){
+
+    // return $request->id;
+
+    $categories  = Post::where("category_id",$request->id)->count();
+    return $categories;
 }
+}
+
+
+
+
+

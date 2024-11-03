@@ -43,29 +43,17 @@
     </AuthenticatedLayout>
 </template>
 
-<script>
+<script setup>
 import { Head, Link, router, usePage } from "@inertiajs/vue3";
 import Dashboard from "@/Pages/Dashboard.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { UserIcon, InboxStackIcon } from "@heroicons/vue/24/solid";
 
-export default {
-    props: {
-        category_post: String,
-        user_post: String,
-        post: Object,
-    },
-    components: {
-        Head,
-        Link,
-        Dashboard,
-        AuthenticatedLayout,
-        UserIcon,
-        usePage,
-        InboxStackIcon,
-    },
-    setup(props) {},
-};
+const props = defineProps({
+    category_post: String,
+    user_post: String,
+    post: Object,
+});
 </script>
 
 <style></style>

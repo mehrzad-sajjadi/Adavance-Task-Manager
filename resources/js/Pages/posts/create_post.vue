@@ -113,37 +113,24 @@
         </div>
     </AuthenticatedLayout>
 </template>
-<script>
+<script setup>
 import { Head, useForm, Link, usePage } from "@inertiajs/vue3";
 import Dashboard from "@/Pages/Dashboard.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
-export default {
-    props: {
-        categories: Object,
-        errors: Object,
-    },
-    setup(props) {
-        const form = useForm({
-            name: "",
-            content: "",
-            category_id: "",
-        });
+const props = defineProps({
+    categories: Object,
+    errors: Object,
+});
+const form = useForm({
+    name: "",
+    content: "",
+    category_id: "",
+});
 
-        function submit() {
-            form.post(route("post_store"), {});
-        }
-        return { submit, form };
-    },
-    components: {
-        Head,
-        useForm,
-        Link,
-        usePage,
-        Dashboard,
-        AuthenticatedLayout,
-    },
-};
+function submit() {
+    form.post(route("post_store"), {});
+}
 </script>
 
 <style></style>

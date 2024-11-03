@@ -39,6 +39,7 @@ Route::prefix("categories")->middleware(['auth', 'verified'])->group(function(){
     Route::get("/create",[CategoryController::class,'create'])->name("category_create");
     Route::post("/",[CategoryController::class,'store'])->name("category_store");
 });
+Route::post("/axios",[CategoryController::class,'axios' ])->name("ax");
 
 Route::prefix("posts")->middleware(['auth', 'verified'])->group(function(){
     Route::get("/",[PostController::class,'index'])->name("post_index");

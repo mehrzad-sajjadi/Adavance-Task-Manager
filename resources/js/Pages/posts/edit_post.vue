@@ -109,38 +109,25 @@
     </AuthenticatedLayout>
 </template>
 
-<script>
+<script setup>
 import { Link, router, usePage, Head, useForm } from "@inertiajs/vue3";
 import Dashboard from "@/Pages/Dashboard.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
-export default {
-    components: {
-        Dashboard,
-        AuthenticatedLayout,
-        Head,
-        useForm,
-        Link,
-        usePage,
-        router,
-    },
-    props: {
-        categories: Object,
-        errors: Object,
-        post: Object,
-    },
-    setup(props) {
-        const form = useForm({
-            name: props.post.name,
-            content: props.post.content,
-            category_id: props.post.category_id,
-        });
-        function update(id) {
-            form.put(route("post_update", [props.post.id]), {});
-        }
-        return { form, update };
-    },
-};
+const props = defineProps({
+    categories: Object,
+    errors: Object,
+    post: Object,
+});
+
+const form = useForm({
+    name: props.post.name,
+    content: props.post.content,
+    category_id: props.post.category_id,
+});
+function update(id) {
+    form.put(route("post_update", [props.post.id]), {});
+}
 </script>
 
 <style></style>

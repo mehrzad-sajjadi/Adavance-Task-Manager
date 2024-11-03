@@ -62,34 +62,20 @@
     </AuthenticatedLayout>
 </template>
 
-<script>
+<script setup>
 import { Head, useForm, Link, usePage, router } from "@inertiajs/vue3";
 import Dashboard from "@/Pages/Dashboard.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
-export default {
-    components: {
-        Dashboard,
-        Head,
-        AuthenticatedLayout,
-        useForm,
-        Link,
-        usePage,
-        router,
-    },
-    props: {
-        category: Object,
-    },
-    setup(props) {
-        console.log(props.category);
-        const form = useForm({
-            name: props.category.name,
-            user_id: props.category.user_id,
-        });
-        function update(id) {
-            form.put(route("category_update", [props.category.id]));
-        }
-        return { form, update };
-    },
-};
+const props = defineProps({
+    category: Object,
+});
+console.log(props.category);
+const form = useForm({
+    name: props.category.name,
+    user_id: props.category.user_id,
+});
+function update(id) {
+    form.put(route("category_update", [props.category.id]));
+}
 </script>

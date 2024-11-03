@@ -45,7 +45,7 @@
                             as="button"
                             type="button"
                             class="h-8 px-4 flex items-center m-2 text-sm text-indigo-100 transition-colors duration-150 bg-blue-500 hover:bg-blue-600 rounded-lg focus:shadow-outline"
-                        >
+                            >نمایش
                             <EyeIcon class="size-6"></EyeIcon>
                         </Link>
 
@@ -56,6 +56,7 @@
                             as="button"
                             type="button"
                         >
+                            حذف
                             <TrashIcon class="size-6"></TrashIcon>
                         </button>
 
@@ -66,6 +67,7 @@
                             type="button"
                             class="h-8 px-4 m-2 flex items-center text-sm transition-colors duration-150 rounded-lg focus:shadow-outline bg-white hover:bg-black text-black hover:text-white border border-black hover:border-transparent"
                         >
+                            ویرایش
                             <PencilSquareIcon class="size-6"></PencilSquareIcon>
                         </Link>
                     </div>
@@ -75,7 +77,7 @@
     </AuthenticatedLayout>
 </template>
 
-<script>
+<script setup>
 import { Link, router, usePage, Head, useForm } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {
@@ -85,36 +87,17 @@ import {
     UserIcon,
 } from "@heroicons/vue/24/solid";
 import Dashboard from "@/Pages/Dashboard.vue";
-export default {
-    components: {
-        UserIcon,
-        Link,
-        EyeIcon,
-        Dashboard,
-        usePage,
-        router,
-        useForm,
-        Head,
-        TrashIcon,
-        PencilSquareIcon,
-        AuthenticatedLayout,
-    },
-    props: {
-        posts: Object,
-        category: Object,
-        user_name: String,
-    },
-    setup(props) {
-        console.log(props.posts);
-        function remove(id) {
-            if (confirm("آیا از حذف پست مطمئنید ؟")) {
-                router.delete(route("post_destroy", id));
-            }
-        }
-
-        return { remove };
-    },
-};
+const props = defineProps({
+    posts: Object,
+    category: Object,
+    user_name: String,
+});
+console.log(props.posts);
+function remove(id) {
+    if (confirm("آیا از حذف پست مطمئنید ؟")) {
+        router.delete(route("post_destroy", id));
+    }
+}
 </script>
 
 <style></style>

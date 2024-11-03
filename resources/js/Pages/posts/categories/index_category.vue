@@ -43,14 +43,15 @@
                     </div>
                     <div class="min-w-max px-5 flex flex-row justify-between">
                         <!-- Show -->
-                        <Link
-                            :href="route('category_show', category.id)"
+                        <button
+                            @click="run(category.id)"
                             as="button"
                             type="button"
                             class="h-8 px-4 flex items-center m-2 text-sm text-indigo-100 transition-colors duration-150 bg-blue-500 hover:bg-blue-600 rounded-lg focus:shadow-outline"
                         >
+                            show
                             <EyeIcon class="size-6"></EyeIcon>
-                        </Link>
+                        </button>
 
                         <!-- delete -->
                         <button
@@ -59,6 +60,7 @@
                             as="button"
                             type="button"
                         >
+                            delete
                             <TrashIcon class="size-6"></TrashIcon>
                         </button>
 
@@ -68,7 +70,7 @@
                             as="button"
                             type="button"
                             class="h-8 px-4 m-2 flex items-center text-sm transition-colors duration-150 rounded-lg focus:shadow-outline bg-white hover:bg-black text-black hover:text-white border border-black hover:border-transparent"
-                        >
+                            >edit
                             <PencilSquareIcon class="size-6"></PencilSquareIcon>
                         </Link>
                     </div>
@@ -82,52 +84,57 @@
         >
             {{ $page.props.crudOperation.success }}
         </p>
+
+        <div v-if="target == true">
+            <teleport to="body">
+                <New :count="data"></New>
+            </teleport>
+        </div>
         <!-- <pagination :links=""></pagination> -->
     </AuthenticatedLayout>
 </template>
 
-<script>
+<script setup>
 import { Link, router, usePage, Head, useForm } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { TrashIcon, PencilSquareIcon, EyeIcon } from "@heroicons/vue/24/solid";
+import New from "./new.vue";
 import Dashboard from "@/Pages/Dashboard.vue";
-export default {
-    components: {
-        Link,
-        EyeIcon,
-        Dashboard,
-        usePage,
-        router,
-        useForm,
-        Head,
-        TrashIcon,
-        PencilSquareIcon,
-        AuthenticatedLayout,
-    },
-    props: {
-        categories: Object,
-        links: Array,
-    },
-    setup(props) {
-        console.log(props.links);
-        function remove(id) {
-            if (
-                confirm(
-                    "با حذف این دسته بندی تمام پست های مربوط یه این بخش حذف خواهند شد . آیا از حذف دسته بندی مطمئنید ؟ "
-                )
-            ) {
-                router.delete(route("category_destroy", id));
-            }
-        }
-        if (usePage().props.crudOperation.success) {
-            window.setTimeout(function () {
-                window.alert(usePage().props.crudOperation.success);
-            }, 500);
-        }
+import { ref } from "vue";
+import axios from "axios";
 
-        return { remove };
-    },
-};
+const props = defineProps({
+    categories: Object,
+    links: Array,
+});
+
+const data = ref(null);
+console.log(props.links);
+function remove(id) {
+    if (
+        confirm(
+            "با حذف این دسته بندی تمام پست های مربوط یه این بخش حذف خواهند شد . آیا از حذف دسته بندی مطمئنید ؟ "
+        )
+    ) {
+        router.delete(route("category_destroy", id));
+    }
+}
+if (usePage().props.crudOperation.success) {
+    window.setTimeout(function () {
+        window.alert(usePage().props.crudOperation.success);
+    }, 500);
+}
+const target = ref(false);
+function run(p) {
+    target.value = true;
+    axios
+        .post(route("ax"), {
+            id: p,
+        })
+        .then((response) => {
+            data.value = response.data;
+        });
+}
 </script>
 
 <style></style>
