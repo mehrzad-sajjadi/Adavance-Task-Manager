@@ -51,10 +51,10 @@ public function create()
     
     $check=Post::where("name",$post->name)->where("category_id",$post->category_id )->first();
     if($check){
-        return redirect()->route("post_create")->with("error","پست مورد نظر قبلا با همین نام و نوع دسته بندی ایجاد شده ");
+        return redirect()->route("post.create")->with("error","پست مورد نظر قبلا با همین نام و نوع دسته بندی ایجاد شده ");
     }else{
         $post->save();
-        return redirect()->route("post_index")->with("message","پست مورد نظر ایجاد شد");
+        return redirect()->route("post.index")->with("message","پست مورد نظر ایجاد شد");
     }
 }
 
@@ -96,10 +96,10 @@ public function update(postRequest $postRequest,$id)
     $check = $post->where("name",$post->name)->where("category_id",$post->category_id)->first();
 
     if($check){
-        return redirect()->route("post_edit",$id)->with("error","پست مورد نظر قبلا با همین نام و نوع دسته بندی ایجاد شده ");
+        return redirect()->route("post.edit",$id)->with("error","پست مورد نظر قبلا با همین نام و نوع دسته بندی ایجاد شده ");
     }else{
         $post->save();
-        return redirect()->route("post_index")->with("message","پست مورد نظر ویرایش شد");
+        return redirect()->route("post.index")->with("message","پست مورد نظر ویرایش شد");
     }
 
 
@@ -112,7 +112,7 @@ public function destroy(Post $post)
 {
     $post->delete();
     return "Finish";
-    // return redirect()->route("post_index")->with("message","پست مورد نظر حذف شد");;
+    // return redirect()->route("post.index")->with("message","پست مورد نظر حذف شد");;
 }
 
 }

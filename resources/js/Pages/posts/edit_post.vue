@@ -96,7 +96,7 @@
                         ویرایش پست
                     </button>
                     <Link
-                        :href="route('post_index')"
+                        :href="route('post.index')"
                         type="submit"
                         as="button"
                         class="h-9 px-4 m-2 text-lg duration-150 rounded focus:shadow-outline bg-[#ffc107] hover:bg-[#ffe607] text-black border border-[#ffc107] hover:border-transparent"
@@ -126,7 +126,7 @@ const form = useForm({
     category_id: props.post.category_id,
 });
 function update(id) {
-    form.put(route("post_update", [props.post.id]), {});
+    form.put(route("post.update", [props.post.id]), {});
 }
 </script>
 

@@ -14,7 +14,7 @@
                 <p class="px-4 m-2 text-xl">لیست پست ها</p>
                 <div>
                     <Link
-                        :href="route('post_create')"
+                        :href="route('post.create')"
                         as="button"
                         type="button"
                         class="h-8 px-4 m-2 text-sm duration-150 rounded focus:shadow-outline bg-[#6c757d] hover:bg-[#757b80] text-white border border-[#6c757d] hover:border-transparent"
@@ -44,7 +44,7 @@
                     <div class="min-w-max px-5 flex flex-row justify-between">
                         <!-- Show -->
                         <Link
-                            :href="route('post_show', post.id)"
+                            :href="route('post.show', post.id)"
                             as="button"
                             type="button"
                             class="h-8 px-4 flex items-center m-2 text-sm text-indigo-100 transition-colors duration-150 bg-blue-500 hover:bg-blue-600 rounded-lg focus:shadow-outline"
@@ -66,7 +66,7 @@
 
                         <!-- edit -->
                         <Link
-                            :href="route('post_edit', post.id)"
+                            :href="route('post.edit', post.id)"
                             as="button"
                             type="button"
                             class="h-8 px-4 m-2 flex items-center text-sm transition-colors duration-150 rounded-lg focus:shadow-outline bg-white hover:bg-black text-black hover:text-white border border-black hover:border-transparent"
@@ -100,7 +100,7 @@ const props = defineProps({
 });
 function remove(id) {
     if (confirm("آیا از حذف پست مطمئنید ؟")) {
-        router.delete(route("post_destroy", id));
+        router.delete(route("post.destroy", id));
     }
 }
 

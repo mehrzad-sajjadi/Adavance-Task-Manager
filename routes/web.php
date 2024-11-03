@@ -31,24 +31,24 @@ Route::get('/dashboard', function () {
 
 
 Route::prefix("categories")->middleware(['auth', 'verified'])->group(function(){
-    Route::get("/",[CategoryController::class,'index'])->name("category_index");
-    Route::delete("/{category}/delete",[CategoryController::class,'destroy'])->name("category_destroy");
-    Route::get("/{category}/show",[CategoryController::class,'show'])->name("category_show");
-    Route::get("/{category}/edit",[CategoryController::class,'edit'])->name("category_edit");
-    Route::put("/{category}/update",[CategoryController::class,'update'])->name("category_update");
-    Route::get("/create",[CategoryController::class,'create'])->name("category_create");
-    Route::post("/",[CategoryController::class,'store'])->name("category_store");
+    Route::get("/",[CategoryController::class,'index'])->name("category.index");
+    Route::delete("/{category}/delete",[CategoryController::class,'destroy'])->name("category.destroy");
+    Route::get("/{category}/show",[CategoryController::class,'show'])->name("category.show");
+    Route::get("/{category}/edit",[CategoryController::class,'edit'])->name("category.edit");
+    Route::put("/{category}/update",[CategoryController::class,'update'])->name("category.store");
+    Route::get("/create",[CategoryController::class,'create'])->name("category.create");
+    Route::post("/",[CategoryController::class,'store'])->name("category.store");
 });
 Route::post("/axios",[CategoryController::class,'axios' ])->name("ax");
 
 Route::prefix("posts")->middleware(['auth', 'verified'])->group(function(){
-    Route::get("/",[PostController::class,'index'])->name("post_index");
-    Route::delete("/{post}/delete",[PostController::class,'destroy'])->name("post_destroy");
-    Route::get("/{post}/show",[PostController::class,'show'])->name("post_show");
-    Route::get("/{post}/edit",[PostController::class,'edit'])->name("post_edit");
-    Route::put("/{post}/update",[PostController::class,'update'])->name("post_update");
-    Route::get("/create",[PostController::class,'create'])->name("post_create");
-    Route::post("/",[PostController::class,'store'])->name("post_store");
+    Route::get("/",[PostController::class,'index'])->name("post.index");
+    Route::delete("/{post}/delete",[PostController::class,'destroy'])->name("post.destroy");
+    Route::get("/{post}/show",[PostController::class,'show'])->name("post.show");
+    Route::get("/{post}/edit",[PostController::class,'edit'])->name("post.edit");
+    Route::put("/{post}/update",[PostController::class,'update'])->name("post.update");
+    Route::get("/create",[PostController::class,'create'])->name("post.create");
+    Route::post("/",[PostController::class,'store'])->name("post.store");
 });
 
 Route::prefix("user")->middleware(['auth', 'verified'])->group(function(){

@@ -55,10 +55,10 @@ public function store(categoryStoreRequest $categoryStoreRequest)
     $category->user_id = $categoryStoreRequest->user_id;
     $check = Category::where("name",$category->name)->where("user_id",$category->user_id )->first();
     if($check){
-        return redirect()->route("category_create")->with("error","شما این دسته بندی را قبلا ایجاد کرده اید");
+        return redirect()->route("category.create")->with("error","شما این دسته بندی را قبلا ایجاد کرده اید");
     }else{
         $category->save();
-        return redirect()->route("category_index")->with("message","دسته بندی با موفقیت ایجاد شد");    
+        return redirect()->route("category.index")->with("message","دسته بندی با موفقیت ایجاد شد");    
     }
 
 }
@@ -117,10 +117,10 @@ public function update(categoryStoreRequest $categoryStoreRequest,$id)
     $category->name=$categoryStoreRequest->name;
     $check = $category->where("name",$category->name)->first();
     if($check){
-        return redirect()->route("category_edit",$id)->with("error","شما این دسته بندی را قبلا ایجاد کرده اید");
+        return redirect()->route("category.edit",$id)->with("error","شما این دسته بندی را قبلا ایجاد کرده اید");
     }else{
         $category->save();
-        return redirect()->route("category_index")->with("message","دسته بندی مورد نظر ویرایش شد");    
+        return redirect()->route("category.index")->with("message","دسته بندی مورد نظر ویرایش شد");    
     }
 }
 
@@ -130,7 +130,7 @@ public function update(categoryStoreRequest $categoryStoreRequest,$id)
 public function destroy(Category $category)
 {
     $category->delete();
-    return redirect()->route("category_index")->with("message","دسته بندی مورد نظر حذف شد");;
+    return redirect()->route("category.index")->with("message","دسته بندی مورد نظر حذف شد");;
 }
 
 

@@ -49,7 +49,7 @@
                         ایجاد دسته بندی
                     </button>
                     <Link
-                        :href="route('category_index')"
+                        :href="route('category.index')"
                         type="submit"
                         as="button"
                         class="h-9 px-4 m-2 text-lg duration-150 rounded focus:shadow-outline bg-[#ffc107] hover:bg-[#ffe607] text-black border border-[#ffc107] hover:border-transparent"
@@ -78,7 +78,7 @@ const form = useForm({
 });
 
 function submit() {
-    form.post(route("category_store"), {});
+    form.post(route("category.store"), {});
 }
 </script>
 

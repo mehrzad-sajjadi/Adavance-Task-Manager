@@ -43,12 +43,12 @@ const showingNavigationDropdown = ref(false);
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
                                 <NavLink
-                                    :href="route('category_index')"
+                                    :href="route('category.index')"
                                     :active="
-                                        route().current('category_index') ||
-                                        route().current('category_create') ||
-                                        route().current('category_show') ||
-                                        route().current('category_edit')
+                                        route().current('category.index') ||
+                                        route().current('category.create') ||
+                                        route().current('category.show') ||
+                                        route().current('category.edit')
                                     "
                                 >
                                     Category
@@ -59,12 +59,12 @@ const showingNavigationDropdown = ref(false);
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
                                 <NavLink
-                                    :href="route('post_index')"
+                                    :href="route('post.index')"
                                     :active="
-                                        route().current('post_create') ||
-                                        route().current('post_show') ||
-                                        route().current('post_index') ||
-                                        route().current('post_edit')
+                                        route().current('post.create') ||
+                                        route().current('post.show') ||
+                                        route().current('post.index') ||
+                                        route().current('post.edit')
                                     "
                                 >
                                     Post

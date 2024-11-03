@@ -17,7 +17,7 @@
                 <p class="px-4 m-2 text-xl">لیست دسته بندی</p>
                 <div>
                     <Link
-                        :href="route('category_create')"
+                        :href="route('category.create')"
                         as="button"
                         type="button"
                         class="h-8 px-4 m-2 text-sm duration-150 rounded focus:shadow-outline bg-[#6c757d] hover:bg-[#757b80] text-white border border-[#6c757d] hover:border-transparent"
@@ -66,7 +66,7 @@
 
                         <!-- edit -->
                         <Link
-                            :href="route('category_edit', category.id)"
+                            :href="route('category.edit', category.id)"
                             as="button"
                             type="button"
                             class="h-8 px-4 m-2 flex items-center text-sm transition-colors duration-150 rounded-lg focus:shadow-outline bg-white hover:bg-black text-black hover:text-white border border-black hover:border-transparent"
@@ -116,7 +116,7 @@ function remove(id) {
             "با حذف این دسته بندی تمام پست های مربوط یه این بخش حذف خواهند شد . آیا از حذف دسته بندی مطمئنید ؟ "
         )
     ) {
-        router.delete(route("category_destroy", id));
+        router.delete(route("category.destroy", id));
     }
 }
 if (usePage().props.crudOperation.success) {
