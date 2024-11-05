@@ -15,11 +15,10 @@ use Inertia\Inertia;
 class CategoryController extends Controller
 {
 
-/**
- * Display a listing of the resource.
- */
-public function index()
-{
+
+public function index(){
+    dd("askldjl");
+
     $categories2 = Category::all();
     $categories=[];
     foreach($categories2 as $category){
@@ -28,26 +27,26 @@ public function index()
             "name"=>$category->name
         ]);
     }
-    // $user_id = Auth::id();
-    // $categories = Category::where('user_id' , $user_id)->get()->map();
-    // $context = [
-    //     id=>
-    // ];
+
     return Inertia::render("posts/categories/index_category",compact("categories"));
 }
+public function axios(Request $request){
+    dd("askldjl");
+    $categories  = Post::where("category_id",$request->id)->count();
+    return $categories;
+}
 
-/**
- * Show the form for creating a new resource.
- */
+
+
+
+
 public function create()
 {
     $user_id=Auth::id();
     return Inertia::render('posts/categories/create_category',compact('user_id'));
 }
 
-/**
- * Store a newly created resource in storage.
- */
+
 public function store(categoryStoreRequest $categoryStoreRequest)
 {
     $category=new Category();
@@ -63,9 +62,6 @@ public function store(categoryStoreRequest $categoryStoreRequest)
 
 }
 
-/**
- * Display the specified resource.
- */
 public function show($id)
 {
 
@@ -82,27 +78,19 @@ public function show($id)
 
 }
 
-/**
- * Show the form for editing the specified resource.
- */
+
 public function edit($id)
 {
-    //باید حتما به صورت آبجکت باشه
+    
     $user = User::find(Auth::id());
 
     $category = Category::findOrFail($id);
-    // if(!$user->can("view",$category)){
-    //     abort(403);
-    // }
-    // dd("Succes");
-    
 
+    
     return Inertia::render("posts/categories/edit_category",compact('category'));
 }
 
-/**
- * Update the specified resource in storage.
- */
+
 
 public function update(categoryStoreRequest $categoryStoreRequest,$id)
 {
@@ -124,9 +112,7 @@ public function update(categoryStoreRequest $categoryStoreRequest,$id)
     }
 }
 
-/**
- * Remove the specified resource from storage.
- */
+
 public function destroy(Category $category)
 {
     $category->delete();
@@ -135,13 +121,6 @@ public function destroy(Category $category)
 
 
 
-public function axios(Request $request){
-
-    // return $request->id;
-
-    $categories  = Post::where("category_id",$request->id)->count();
-    return $categories;
-}
 }
 
 

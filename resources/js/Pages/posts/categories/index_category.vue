@@ -77,20 +77,16 @@
                 </li>
             </ul>
         </div>
+        <div>
+            <p
+                class="flex flex-row justify-center text-xl text-center"
+                v-if="$page.props.crudOperation.success"
+            >
+                {{ $page.props.crudOperation.success }}
+            </p>
 
-        <p
-            class="flex flex-row justify-center text-xl text-center"
-            v-if="$page.props.crudOperation.success"
-        >
-            {{ $page.props.crudOperation.success }}
-        </p>
-
-        <div v-if="target == true">
-            <teleport to="body">
-                <New :count="data"></New>
-            </teleport>
+            <New :count="data"></New>
         </div>
-        <!-- <pagination :links=""></pagination> -->
     </AuthenticatedLayout>
 </template>
 
@@ -136,5 +132,3 @@ function run(p) {
         });
 }
 </script>
-
-<style></style>
